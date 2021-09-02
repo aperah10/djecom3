@@ -38,6 +38,7 @@ class AllProductSer(serializers.ModelSerializer):
     class Meta: 
         model=Product
         fields='__all__' 
+        depth = 1
 
 # CART FOR DATA 
 class CartSer(serializers.ModelSerializer):
@@ -45,6 +46,7 @@ class CartSer(serializers.ModelSerializer):
     class Meta: 
         model=ProductInCart 
         fields ='__all__'
+        depth = 1
 
 
 # CART FOR DATA 
