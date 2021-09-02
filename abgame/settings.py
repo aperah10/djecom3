@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'customer',
     'product',
     'restapi',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +109,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  #                                 ! MY SETTINGS                                #
  # ---------------------------------------------------------------------------- #
 AUTH_USER_MODEL='accounts.CustomUser' 
-
+CORS_ORIGIN_ALLOW_ALL = True
  # ---------------------------------------------------------------------------- #
  #                              !DATABASE SETTINGS                              #
  # ---------------------------------------------------------------------------- #
