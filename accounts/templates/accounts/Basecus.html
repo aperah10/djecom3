@@ -1,0 +1,189 @@
+<!DOCTYPE html>  {% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reg |{% block t1 %}  {% endblock t1 %}  </title>   
+
+ 
+
+
+    <!--Font Awesome CSS CDN --> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+
+     <!-- Bootstrap CSS Local -->
+  <link rel="stylesheet" href="{% static 'accounts/css/bootstrap.css' %}">  
+
+  <!-- Drawer CSS File -->
+  <link rel="stylesheet" href="{% static 'accounts/css/bootstrap-drawer.min.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'accounts/css/customnavbar.css' %}">
+   {% block s1 %}  {% endblock s1 %}
+
+</head> 
+<body> 
+  
+   
+
+
+<!-- Navigation bar  -->
+<nav class="navbar navbar-expand-md navbar-dark "  style=" background-color: rgb(155, 139, 139);"> 
+
+     <!-- Drawer Start -->
+     <button class="btn btn-outline-light" data-toggle="drawer" data-target="#amazonDrawer">
+      
+      <i class="fas fa-sliders-h"></i>
+    
+   </button>
+
+    <div class="drawer drawer-left slide" tabindex="-1" role="dialog" aria-labelledby="drawer-demo-title"
+      aria-hidden="true" id="amazonDrawer">
+      <div class="drawer-content drawer-content-scrollable" role="document">
+        <div class="drawer-header bg-dark text-white">
+          <h4 class="drawer-title mx-auto" id="drawer-demo-title">
+            
+            <i class="fas fa-user-circle"></i>
+           
+            Hello, Sign In
+          </h4>
+        </div> 
+
+        <div class="drawer-body">
+          <h6 class="text-muted text-uppercase">Help & Settings</h6> 
+             
+         
+          {% if request.user.is_authenticated %}
+
+          <a href="{% url 'profile' request.user.id %}"
+           class="btn btn-outline-success my-2 btn-sm"> {{request.user.fullname}} </a>
+        
+          <a href="{% url 'showaddress' request.user.id  %} " class="btn btn-warning my-2  btn-sm"> Address </a>
+
+          <a href="{% url 'logout' %} " class="btn btn-warning my-2  btn-sm"> Logout </a> 
+
+          <!-- API BTTUONS  --> 
+          <a href="{% url 'showaddress' request.user.id  %} " class="btn btn-warning my-2  btn-sm"> Address </a>
+          <!-- END API BUTTIONS  -->
+          {% else %}  
+          <a href="{% url 'signup'  %} " class="btn btn-warning my-2  btn-sm">Sign in</a> 
+         
+          {% endif %}
+        </div> 
+
+        <div class="drawer-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="drawer" aria-label="Close">
+           
+            <i class="fas fa-2x fa-times"></i>
+         
+         </button>
+        </div>
+      </div>
+    </div> <!-- Drawer Ends -->
+
+   
+  
+
+
+
+
+
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Search Bar Starts -->
+      <form class="form-inline px-lg-5" novalidate method="get">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" name="btnCategory" type="button"
+                id="btnCategoryDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnCategoryDropdownMenu">
+                <a class="dropdown-item" href="#">All</a>
+                <a class="dropdown-item" href="#">Smartphone</a>
+                <a class="dropdown-item" href="#">Kitchen Hardware</a>
+                <a class="dropdown-item" href="#">Prime Deals</a>
+                <a class="dropdown-item" href="#">Book</a>
+              </div>
+            </div>
+          </div>
+          <input type="text" class="form-control" size="50" name="query" id="query">
+          <input type="text" name="category" id="category" value="book" hidden>
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-warning">
+              
+               <i class="fas fa-search"></i>
+          
+            </button>
+          </div>
+        </div>
+      </form> <!-- Search Bar Ends --> 
+
+
+     
+
+
+       <ul class="navbar-nav">
+      <!-- User Account Starts -->
+      <li class="nav-item dropdown px-2">
+         <a class="nav-link" href="{% url 'login' %} " id="userAccount" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          
+           <i class="fas fa-2x fa-user-circle" style="background-color: blue; color: aqua;"></i> 
+
+         </a>
+         <div class="dropdown-menu px-3" aria-labelledby="userAccount">
+           <div class="d-flex flex-column justify-content-center">
+             <a href="{% url 'login'  %}" class="btn btn-warning w-75 btn-sm font-weight-bold">Login</a>
+             <span>New customer? <a href="{% url 'signup' %}"> Start here.</a></span>
+           </div>
+         </div>
+       </li> 
+       <!-- User Account Ends --> 
+
+       <!-- Shopping Cart Starts -->
+       <li class="nav-item px-2">
+         <a class="nav-link" href="#" aria-disabled=" true">
+           <i class="fas fa-2x text-red fa-shopping-cart"></i>
+           <span class="badge badge-warning badge-pill">0</span>
+         </a>
+       </li>  
+       <!-- Shopping Cart Starts -->
+    
+      </ul>
+   </div>
+ </nav>  
+ <!-- Navbar Ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end Navigation bar  -->
+{% block c1 %}  {% endblock c1 %}
+{% block c2 %}     {% endblock c2 %} 
+{% block c3 %}     {% endblock c3 %} 
+
+<script src="{% static 'accounts/js/jqu.js' %}">  </script>
+<script src="{% static 'accounts/js/pop.js' %}">  </script> 
+<script src="{% static 'accounts/js/boot.js' %}">  </script>
+
+ <!-- Drawer JS File -->
+ <script src="{% static 'accounts/js/bootstrap-drawer.min.js' %}"></script>
+
+
+
+</body>
+</html>  

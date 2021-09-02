@@ -1,0 +1,242 @@
+<!DOCTYPE html>  {% load static %} 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Home Page  </title>
+    <!-- Bootstrap CSS Local -->
+    <link rel="stylesheet" href="{% static 'restapi/css/bootstrap.css' %}">  
+  <link rel="stylesheet" href="{% static 'restapi/css/table.css' %}"> 
+</head>
+<body>
+  
+
+
+  <h1>  {{request.user}} </h1>  
+
+  <h2>   We have all List of Page in this Website  </h2>
+ 
+ 
+  <!-- TABLE FOR THE HOME PAGE  -->
+  <table>
+     <caption>Statement Summary</caption>
+     <thead>
+       <tr>
+           <th scope="col"> Serial No.  </th>
+         <th scope="col">Page Name </th>
+         <th scope="col">  Date</th>
+         <th scope="col"> Url link  </th>
+        
+       </tr>
+     </thead>
+     <tbody> 
+       {% if request.user.is_authenticated %} 
+       <tr>
+           <td data-label="Serial"> 0 </td>
+           <td data-label="Account"> Logout </td>
+   
+           <td data-label="Due Date">04/01/2021</td>
+          
+           <td data-label="Period">   <a href="{% url 'logout'  %}" 
+               class="btn btn-outline-success my-2 btn-sm">
+                Logout </a></td>
+         </tr>  
+          {% endif %}
+  
+    
+         <tr>
+           <td data-label="Serial"> 0 </td>
+           <td data-label="Account"> Product </td>
+   
+           <td data-label="Due Date">04/01/2021</td>
+          
+           <td data-label="Period">   <a href="{% url 'product'  %}" 
+               class="btn btn-outline-success my-2 btn-sm">
+                Product </a></td>
+         </tr> 
+
+       <tr>
+         <td data-label="Serial"> 1.1 </td>
+         <td data-label="Account"> Login </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'Login'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Login </a></td>
+       </tr>
+
+       <tr>
+         <td data-label="Serial"> 1.2 </td>
+         <td data-label="Account"> Search </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'searchbar'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Search </a></td>
+       </tr>
+
+        <tr>
+         <td data-label="Serial"> 1.3 </td>
+         <td data-label="Account"> Searchb </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+{% comment %}         
+         <td data-label="Period">   <a href="{% url 'searchb'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              SearchB </a></td> {% endcomment %}
+       </tr>
+
+       <tr>
+         <td data-label="Serial"> 1 </td>
+         <td data-label="Account"> PostApi </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'getdata'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Get All data </a></td>
+       </tr> 
+
+
+ 
+ 
+       <tr>
+         <td data-label="Serial"> 2 </td>
+         <td data-label="Account"> Get Cart </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'cart'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Get Cart data </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 3 </td>
+         <td data-label="Account"> Get Like </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'like'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Get Like data </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 4 </td>
+         <td data-label="Account"> Notification </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'noti'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Get Notification  </a></td>
+       </tr>
+    
+       <!-- POST DATA  --> 
+       <tr>
+         <td data-label="Serial"> 5 </td>
+         <td data-label="Account"> Post User </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'postdata'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Post User </a></td>
+       </tr>
+ 
+ 
+       <tr>
+         <td data-label="Serial"> 6 </td>
+         <td data-label="Account"> Post Cart </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'postcart'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Post Cart  </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 7 </td>
+         <td data-label="Account"> Post Like </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'postlike'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Post Like  </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 8 </td>
+         <td data-label="Account"> Post Notification </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'postnoti'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Post Notification  </a></td>
+       </tr>
+ 
+       <!-- DELETE DATA  -->
+    
+       <tr>
+         <td data-label="Serial"> 9 </td>
+         <td data-label="Account"> Delete Cart </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'delcart'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Delete Cart  </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 10 </td>
+         <td data-label="Account"> Delete Like </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'dellike'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Delete Like  </a></td>
+       </tr>
+ 
+       <tr>
+         <td data-label="Serial"> 11 </td>
+         <td data-label="Account"> Delete Notification </td>
+ 
+         <td data-label="Due Date">04/01/2021</td>
+        
+         <td data-label="Period">   <a href="{% url 'delnoti'  %}" 
+             class="btn btn-outline-success my-2 btn-sm">
+              Delete Notification  </a></td>
+       </tr>
+
+     </tbody>
+   </table>
+  <!-- END TABLE FOR HOME PAGE  -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+

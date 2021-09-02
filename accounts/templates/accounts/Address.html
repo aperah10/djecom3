@@ -1,0 +1,78 @@
+{% extends 'accounts/BaseCus.html' %}  {% load static %}   
+
+{% block t1 %} addaddress {% endblock t1 %} 
+
+
+{% block c1 %} 
+   
+  <h1> {{request.user.id}}  </h1>  
+
+ <!-- New Address Form Starts -->
+ <div class="container mt-5 mb-5"> 
+
+          <!-- URL Breadcrumb Starts -->
+          <nav aria-label="breadcrumb">
+              <ol class="breadcrumb bg-transparent ml-n3">
+                 <li class="breadcrumb-item"><a href="your_account.html">Your Account </a></li>
+                 <li class="breadcrumb-item"><a href="{% url 'showaddress' request.user.id %} ">Your Addresses</a></li>
+                 <li class="breadcrumb-item active text-danger" aria-current="page">New Address</li>
+              </ol>
+          </nav> 
+          <!-- URL Breadcrumb Ends -->
+
+           <!-- HEADLINES  -->
+    <h3 class="font-weight-bold">Add a your address</h3>
+    <p class="font-weight-bold">Or pick up your packages at your convenience from our self-service locations.</p>
+   
+    
+    <!-- New Address Form Starts -->
+    <form class="mx-auto font-weight-bold needs-validation"  method="post" enctype="multipart/form-data" novalidate > {% csrf_token %}
+          {% for fm in form %}  
+         <div class="form-group">  
+            {{fm.label}} {{fm}}
+         
+          <div class="valid-feedback">
+            <i class="far text-success fa-thumbs-up"></i> OK
+          </div>
+          <div class="invalid-feedback">
+            <i class="fas text-danger fa-exclamation-triangle"></i> Some error in full name.
+          </div>
+        </div> 
+        {% endfor %}  
+        <br> 
+        <!-- <input type="submit" value="save">  --> 
+        <button type="submit" class="btn btn-warning shadow rounded">Add address</button>
+  </form>
+
+
+
+
+
+
+
+
+{% endblock c1 %} 
+
+{% block c3 %}  
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
+{% endblock c3 %}

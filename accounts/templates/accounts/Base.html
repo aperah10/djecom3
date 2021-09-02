@@ -1,0 +1,68 @@
+<!DOCTYPE html>  {% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reg | {% block t1 %}  {% endblock t1 %}  </title> 
+    <link rel="stylesheet" href="{% static 'accounts/css/bootstrap.css' %} "> 
+    <link rel="stylesheet" href="{% static 'accounts/css/custom.css' %}">
+    {% block s1 %}  
+
+{% endblock s1 %}
+    
+</head> 
+<body> 
+  
+    <h1>  search bar </h1>  
+<!-- Navigation bar  -->
+
+<div class="wrapper">
+    <header>
+       <nav>
+          <div class="menu-icon">
+             <i class="fa fa-bars fa-2x"></i>
+          </div>
+          <div class="logo">
+             LOGO
+          </div>
+          <div class="menu">
+             <ul> 
+          
+
+                  
+
+                <li><a href="{%  %}">Home</a></li> 
+                <li><a href="">Category</a></li>
+                
+                
+                {% if request.user.is_authenticated %} 
+                
+                <li><a href="{% url 'profile' %}"> Profile</a></li> 
+                <li><a href="{% url 'showaddress' %}"> Address </a></li>
+                <li><a href="#">Cart</a></li>
+                 <li><a href="{% url 'logout'  %}">  Logout </a></li> 
+                
+                {% else %}  
+                <li><a href="{% url 'signup' %}"> Signup and Login </a></li> 
+               
+                {% endif %}  
+                
+                
+             </ul>
+          </div> 
+       </nav>
+    </header> 
+
+ </div>  
+
+
+{% block c1 %}  
+{% endblock c1 %}
+{% block c2 %}     {% endblock c2 %} 
+{% block c3 %}     {% endblock c3 %} 
+
+
+
+</body>
+</html>  

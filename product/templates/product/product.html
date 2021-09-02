@@ -1,0 +1,20 @@
+{% extends 'accounts/Basecus.html' %}  {% load static %} 
+
+{% block t1 %} Product {% endblock t1 %} 
+
+
+{% block c1 %} 
+   <h1>  Product , {{request.user.fullname}} {{request.user.id}} </h1>
+   
+  
+   
+<form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+   {{form.as_p}} 
+
+    <input type="submit" value="save">
+</form>
+
+{% endblock c1 %} 
+{% block c2 %}   {% endblock c2 %}
+{% block c3 %}   {% endblock c3 %}
