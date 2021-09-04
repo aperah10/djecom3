@@ -43,8 +43,8 @@ class Register(View):
 class LoginPage(View): 
     def get(self,request): 
         lform =LoginForm() 
-        if request.user.is_authenticated:
-            return redirect('home') 
+        # if request.user.is_authenticated:
+        #     return redirect('home') 
         
         return render(request,'accounts/login.html',{'lform':lform}) 
     

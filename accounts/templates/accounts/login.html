@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2> Login Page  </h2>  
-    {% if not request.user.is_authenticated %}
+    {% comment %} {% if not request.user.is_authenticated %} {% endcomment %}
     <button> <a href="{% url 'signup' %}">   Signup   </a>  </button>
     
    <form action="" method="post">
@@ -16,8 +16,8 @@
        {{lform.as_p}}
        <input type="submit" value="Submit">
    </form> 
-   {% else %} 
-    <li><a href="{% url 'logout' %}"> Logout </a></li> 
-    {% endif %}
+   {% comment %} {% else %}  {% endcomment %}
+    {% comment %} <li><a href="{% url 'logout' %}"> Logout </a></li> 
+    {% endif %} {% endcomment %}
 </body>
 </html>

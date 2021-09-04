@@ -15,7 +15,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework import generics, permissions
-from rest_framework.decorators import api_view, permission_classes 
+from rest_framework.decorators import api_view, permission_classes ,authentication_classes
 
 from rest_framework.filters import SearchFilter 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -123,16 +123,77 @@ def login(request):
                     status=HTTP_200_OK)
 
 
+# ! POST METHOD
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((TokenAuthentication,))
+def PostCartm(request):
+    
+    dat =request.data
+    product_id = request.data['product']
+    quan =request.data['quantity']
+    product_obj = Product.objects.get(id=product_id) 
+    
+    print('-----------------------------------------------------------------------------')
+    print('this is data ',dat) 
+    print('this is qunatity',quan)
+    print( type(str(request.user)),'this is user')
+    print('this is product id' ,product_id)
+    print('this is product object_; ',product_obj)
+    new_cart={
+            'qunatity': data.get('qunatity'),
+            'product': data.get('product'),
+            'customer_cart': data.get('customer_cart'),}
+
+    if  ProductInCart.objects.filter(Q(customer_cart__exact=data.get('customer_cart')) & Q(product__exact=data.get('product'))):
+        return Response({"stateCode": 201, "msg": "User Exits"}, 201)
+        
+        # if CustomUser.objects.filter(email__exact=data.get('email')):
+        #     return Response({"stateCode": 202, "msg": "User enn"}, 201)   
+    serializer = CartSer(data=new_cart)
+        # print('this is data :-' ,data)
+    # print('this is seriallizer:- ',serializer)
+    if serializer.is_valid(raise_exception=True):
+        
+        serializer.save()
+        user = serializer.save()
+        return Response({"stateCode": 200, "msg": "enter data",})
+    
+    return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-
-# nrw cart post for check 
-class PostCart(CreateAPIView):
+# nrw cart post for check
+# @csrf_exempt
+class PostCart(APIView):
     permission_classes=[IsAuthenticated] 
     authentication_classes = [TokenAuthentication, ] 
 
-    queryset = ProductInCart.objects.all()
-    serializer_class=CartSer  
+    # queryset = ProductInCart.objects.all()
+    # serializer_class=CartSer  
+    @csrf_exempt
+    def post(self,request):
+        data =request.data
+        # product_id = request.data['id']
+        # product_obj = Product.objects.get(id=product_id)
+        new_cart={
+            'qunatity': data.get('qunatity'),
+            'product': data.get('product'),
+            'customer_cart': data.get('customer_cart'),}
+        
+        if  ProductInCart.objects.filter(Q(customer_cart__exact=data.get('customer_cart')) & Q(product__exact=data.get('product'))):
+         return Response({"stateCode": 201, "msg": "User Exits"}, 201)
+        
+
+        serializer = CartSer(data=new_cart)
+        # print('this is data :-' ,data)
+        # print('this is seriallizer:- ',serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user = serializer.save()
+            return Response({"stateCode": 200, "msg": "enter data",})
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
 
 # NEW LIKE  post for check 
 class PostLike(CreateAPIView):
@@ -189,7 +250,7 @@ class AllProduct(ListAPIView):
 # CART FOR USER 
 class GetCart(APIView):
     permission_classes=[IsAuthenticated] 
-    authentication_classes = [TokenAuthentication, ] 
+    # authentication_classes = [TokenAuthentication, ] 
 
     
     def get(self,request):

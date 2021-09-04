@@ -20,7 +20,8 @@ urlpatterns =[
     # ==========POST REQUEST FOR ==================
     # path('login/', obtain_auth_token),
     path('login/', views.login, name='Login'),
-    path('crusr', views.PostRegister.as_view(),name='postdata') ,
+    path('pm/',views.PostCartm,name='cartm'),
+    path('crusr', views.PostRegister.as_view(),name='postdata'),
     path('crcart/',views.PostCart.as_view(),name='postcart'),
     path('crlike/',views.PostLike.as_view(),name='postlike'),
     path('crnoti/',views.PostNoti.as_view(),name='postnoti'),  
