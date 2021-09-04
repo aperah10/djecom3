@@ -1,16 +1,16 @@
-from rest_framework import serializers 
+from rest_framework import serializers
 
-# MY IMPORT FOR ALL FIELS  
-from accounts.models import * 
-from product.models import * 
+# MY IMPORT FOR ALL FIELS
+from accounts.models import *
+from product.models import *
+
 # ================
 
-# make accounts in 
+# make accounts in
 class AccountsSeri(serializers.ModelSerializer):
-
     class Meta:
-        model =CustomUser 
-        fields=['email','fullname','phone','password'] 
+        model = CustomUser
+        fields = ["email", "fullname", "phone", "password"]
 
         # fields = ('id', 'username', 'password',
         #           'first_name', 'last_name', 'email',)
@@ -23,46 +23,46 @@ class AccountsSeri(serializers.ModelSerializer):
             return user
 
 
-
-# PROFILE ACCOTUNS 
+# PROFILE ACCOTUNS
 class ProfileSeri(serializers.ModelSerializer):
-
     class Meta:
-        model=Profile 
-        fields='__all__'
+        model = Profile
+        fields = "__all__"
 
 
-# ALL PRODUCT SHOW DATA 
+# ALL PRODUCT SHOW DATA
 class AllProductSer(serializers.ModelSerializer):
-
-    class Meta: 
-        model=Product
-        fields='__all__' 
+    class Meta:
+        model = Product
+        fields = "__all__"
         depth = 1
 
-# CART FOR DATA 
+
+# CART FOR DATA
 class CartSer(serializers.ModelSerializer):
-
-    class Meta: 
-        model=ProductInCart 
-        fields ='__all__' 
-        depth= 2
-         
+    class Meta:
+        model = ProductInCart
+        fields = "__all__"
+        depth = 2
 
 
-# CART FOR DATA 
+# !CART ADDED SERILIZER
+class AddCartSer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductInCart
+        fields = ["product"]
+
+
+# CART FOR DATA
 class LikeSer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ["product", "user"]
 
-    class Meta: 
-        model=Like
-        fields =['product','user']
 
-
-# NOTIFICATION FOR DATA 
+# NOTIFICATION FOR DATA
 class NotificationSer(serializers.ModelSerializer):
-
-    class Meta: 
-        model=Notification
-        fields ='__all__' 
+    class Meta:
+        model = Notification
+        fields = "__all__"
         # depth = 1
-
