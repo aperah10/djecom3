@@ -198,7 +198,7 @@ class PostCart(APIView):
 # NEW LIKE  post for check 
 class PostLike(CreateAPIView):
     permission_classes=[IsAuthenticated] 
-    authentication_classes = [TokenAuthentication, ] 
+    # authentication_classes = [TokenAuthentication, ] 
 
     queryset = Like.objects.all()
     serializer_class=LikeSer  
