@@ -46,7 +46,7 @@ class CartSer(serializers.ModelSerializer):
     class Meta: 
         model=ProductInCart 
         fields ='__all__'
-         depth = 2
+         
 
 
 # CART FOR DATA 
