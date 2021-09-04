@@ -122,10 +122,10 @@ def login(request):
 
 
 # ! POST METHOD
-@csrf_exempt
+# @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
-@authentication_classes((TokenAuthentication,))
+# @permission_classes((IsAuthenticated,))
+# @authentication_classes((TokenAuthentication,))
 def PostCartm(request):
 
     quan = request.data.get("quantity")
@@ -139,8 +139,8 @@ def PostCartm(request):
     # print("quantity:- ", quan)
     # print("prod:- ", prod)
 
-    new_cart = {"qunatity": quan, "product": prod, "customer_cart": usr}
-    # print(new_cart)
+    new_cart = {"qunatity": quan, "product": prod, "customer_cart": str(usr)}
+    print(new_cart)
 
     # if ProductInCart.objects.filter(
     #     Q(customer_cart__exact=data.get("customer_cart"))
@@ -148,7 +148,7 @@ def PostCartm(request):
     # ):
     #     return Response({"stateCode": 201, "msg": "User Exits"}, 201)
 
-    serializer = CartSer(data=new_cart)
+    serializer = AddCartSer(data=new_cart)
     # print('this is data :-' ,data)
 
     # print("this is seriallizer:- ", serializer)
@@ -169,14 +169,14 @@ def PostCartm(request):
 # nrw cart post for check
 # @csrf_exempt
 class PostCart(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [
-        TokenAuthentication,
-    ]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [
+    #     TokenAuthentication,
+    # ]
 
     # queryset = ProductInCart.objects.all()
     # serializer_class=CartSer
-    @csrf_exempt
+    # @csrf_exempt
     def post(self, request):
         data = request.data
         # product_id = request.data['id']
@@ -193,7 +193,7 @@ class PostCart(APIView):
         ):
             return Response({"stateCode": 201, "msg": "User Exits"}, 201)
 
-        serializer = CartSer(data=new_cart)
+        serializer = AddCartSer(data=new_cart)
         # print('this is data :-' ,data)
         # print('this is seriallizer:- ',serializer)
         if serializer.is_valid(raise_exception=True):
