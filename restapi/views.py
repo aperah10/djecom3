@@ -176,7 +176,7 @@ class PostCart(APIView):
 
     # queryset = ProductInCart.objects.all()
     # serializer_class=CartSer
-    # @csrf_exempt
+    @csrf_exempt
     def post(self, request):
         data = request.data
         # product_id = request.data['id']
@@ -188,7 +188,7 @@ class PostCart(APIView):
         }
 
         if ProductInCart.objects.filter(
-            Q(customer_cart__exact=data.get("customer_cart"))
+            Q(customer_cart__exact=request.user.id)
             & Q(product__exact=data.get("product"))
         ):
             return Response({"stateCode": 201, "msg": "User Exits"}, 201)
