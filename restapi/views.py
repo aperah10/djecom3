@@ -122,7 +122,7 @@ def login(request):
 
 
 # ! POST METHOD
-# @csrf_exempt
+@csrf_exempt
 @api_view(["POST"])
 @permission_classes((IsAuthenticated,))
 @authentication_classes((TokenAuthentication,))
@@ -131,7 +131,7 @@ def PostCartm(request):
     quan = request.data.get("quantity")
     prod = request.data.get("product")
 
-    usr = request.user
+    usr = request.user.id
     # print(
     #     "-----------------------------------------------------------------------------"
     # )
@@ -184,7 +184,7 @@ class PostCart(APIView):
         new_cart = {
             "qunatity": data.get("qunatity"),
             "product": data.get("product"),
-            "customer_cart": data.get("customer_cart"),
+            "customer_cart": str(request.user.id),
         }
 
         if ProductInCart.objects.filter(

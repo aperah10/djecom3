@@ -50,7 +50,7 @@ class CartSer(serializers.ModelSerializer):
 class AddCartSer(serializers.ModelSerializer):
     class Meta:
         model = ProductInCart
-        fields = ["product", "quantity", "customer_cart"]
+        fields = ["product", "quantity"]
 
 
 # CART FOR DATA
