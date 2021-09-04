@@ -124,8 +124,8 @@ def login(request):
 # ! POST METHOD
 # @csrf_exempt
 @api_view(["POST"])
-# @permission_classes((IsAuthenticated,))
-# @authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+@authentication_classes((TokenAuthentication,))
 def PostCartm(request):
 
     quan = request.data.get("quantity")
@@ -169,10 +169,10 @@ def PostCartm(request):
 # nrw cart post for check
 # @csrf_exempt
 class PostCart(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [
-    #     TokenAuthentication,
-    # ]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
 
     # queryset = ProductInCart.objects.all()
     # serializer_class=CartSer
