@@ -141,7 +141,7 @@ def PostCartm(request):
     # print("prod:- ", prod)
 
     new_cart = {"quantity": quan, "product": prod, "customer_cart": str(usr)}
-    print(new_cart)
+    # print(new_cart)
 
     # if ProductInCart.objects.filter(
     #     Q(customer_cart__exact=data.get("customer_cart"))
@@ -355,9 +355,9 @@ class DeleteCart(APIView):
     def post(self, request):
         prod = request.data.get("product")
         # cus = str(request.data.get("customer_cart"))
-        cus = str(request.user.id)
-        print("product:- ", prod)
-        print("cus :- ", cus)
+        cus = request.user
+        # print("product:- ", prod)
+        # print("cus :- ", cus)
 
         try:
             if ProductInCart.objects.filter(
