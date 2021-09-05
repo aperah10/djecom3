@@ -46,7 +46,7 @@ class ProductInCart(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     customer_cart = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)
 
     # def __str__(self):
