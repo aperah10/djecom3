@@ -344,12 +344,13 @@ class GetNoti(APIView):
 
 # !DELETE CART
 class DeleteCart(APIView):
-    # permission_classes = [
-    #     IsAuthenticated,
-    # ]
-    # authentication_classes = [
-    #     TokenAuthentication,
-    # ]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+
     @csrf_exempt
     def post(self, request):
         prod = request.data.get("product")
