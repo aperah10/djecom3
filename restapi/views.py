@@ -124,14 +124,14 @@ def login(request):
 # ! POST METHOD
 @csrf_exempt
 @api_view(["POST"])
-@permission_classes((IsAuthenticated,))
-@authentication_classes((TokenAuthentication,))
+# @permission_classes((IsAuthenticated,))
+# @authentication_classes((TokenAuthentication,))
 def PostCartm(request):
 
     quan = request.data.get("quantity")
     prod = request.data.get("product")
     usr = request.user.id
-    # cus = request.data.get("customer_cart")
+    # usr = request.data.get("customer_cart")
 
     # print(
     #     "-----------------------------------------------------------------------------"
@@ -139,8 +139,8 @@ def PostCartm(request):
 
     # print("quantity:- ", quan)
     # print("prod:- ", prod)
-    # new_cart = {"quantity": quan, "product": prod, "customer_cart": cus}
-    new_cart = {"qunatity": quan, "product": prod, "customer_cart": str(usr)}
+
+    new_cart = {"quantity": quan, "product": prod, "customer_cart": str(usr)}
     print(new_cart)
 
     # if ProductInCart.objects.filter(
@@ -177,7 +177,7 @@ class PostCart(APIView):
 
     # queryset = ProductInCart.objects.all()
     # serializer_class=CartSer
-    @csrf_exempt
+    # @csrf_exempt
     def post(self, request):
         data = request.data
         # product_id = request.data['id']
@@ -185,8 +185,8 @@ class PostCart(APIView):
         new_cart = {
             "quantity": data.get("quantity"),
             "product": data.get("product"),
-            # "customer_cart": str(request.user.id),
-            "customer_cart": data.get("customer_cart"),
+            "customer_cart": str(request.user.id),
+            # "customer_cart": data.get("customer_cart"),
         }
 
         if ProductInCart.objects.filter(
@@ -351,11 +351,11 @@ class DeleteCart(APIView):
         TokenAuthentication,
     ]
 
-    @csrf_exempt
+    # @csrf_exempt
     def post(self, request):
         prod = request.data.get("product")
-        # cus = request.data.get("customer_cart")
-        cus = request.user.id
+        # cus = str(request.data.get("customer_cart"))
+        cus = str(request.user.id)
         print("product:- ", prod)
         print("cus :- ", cus)
 
@@ -368,7 +368,7 @@ class DeleteCart(APIView):
                 )
                 print(pod)
                 pod.delete()
-                res = {"error": 200, "msg": "data delete"}
+                res = {"error": False, "msg": "data delete"}
             else:
                 res = {"error": True, "msg": " not have any data"}
 
