@@ -7,6 +7,9 @@ from django.conf.urls import url
 # app_name ='restapi'
 
 urlpatterns = [
+    path("profile/", views.ProfilePage.as_view(), name="profile"),
+    path("address/", views.AddressV.as_view(), name="address"),
+    # path("profilep/", views.ProfilePostV.as_view(), name="profilef"),
     # ========== THIS IS HOME PAGE ==========
     url(r"^hm/", views.HomePage.as_view()),
     path("", views.HomePage.as_view(), name="home"),

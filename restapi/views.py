@@ -438,3 +438,131 @@ class DeleteNoti(APIView):
         except:
             res = {"error": True}
         return Response(res)
+
+
+# ---------------------------------------------------------------------------- #
+#                     orc   PROFILE PAGE GET AND POST METHOD                     #
+# ---------------------------------------------------------------------------- #
+class ProfilePage(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+
+    # todo  GET METHOD
+    def get(self, request):
+        usr = request.user
+        prof = Profile.objects.filter(uplod=usr)
+        # prof = Profile.objects.filter(uplod="e1ff4d87-d9a6-4533-836a-0c640034b8eb")
+
+        try:
+
+            ser = ProfileSer(prof, many=True)
+            alldata = ser.data
+
+        except:
+            alldata = ser.errors
+
+        return Response(alldata)
+
+    # orc PROFILE POST METHOD
+
+    def post(self, request, pk=None):
+        data = request.data
+        idt=request.user.id
+        # idt = request.data.get("id") 
+
+        cus = Profile.objects.get(pk=idt)
+        # print("this is profile id ,:- ", idt)
+
+        # print(cus)
+        # product_obj = Product.objects.get(id=product_id)
+        new_profile = {
+            "fullname": data.get("fullname"),
+            "email": data.get("email"),
+            "gender": data.get("gender"),
+            "pic": data.get("pic"),
+        }
+
+        # print(new_profile)
+        serializer = PostProfileSer(cus, data=new_profile)
+
+        # print(serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user = serializer.save()
+            return Response(
+                {
+                    "stateCode": 200,
+                    "msg": "enter data",
+                }
+            )
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+# ---------------------------------------------------------------------------- #
+#                   ! ADDRESS POST & GET  METHOD                                     #
+# ---------------------------------------------------------------------------- #
+class AddressV(APIView):
+
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+
+    # todo  GET METHOD
+    def get(self, request):
+        usr = request.user
+        addres = Profile.objects.filter(uplod=usr)
+        # addres = Address.objects.filter(uplod="e1ff4d87-d9a6-4533-836a-0c640034b8eb")
+
+        try:
+
+            ser = AddressSer(addres, many=True)
+            alldata = ser.data
+
+        except:
+            alldata = ser.errors
+
+        return Response(alldata)
+
+    # orc PROFILE POST METHOD
+
+    def post(self, request, pk=None):
+        data = request.data
+        usr = str(request.user.id)
+        # usr = str("80d491f9-9671-48c0-8ab3-c7c4891687af")
+
+        new_addres = {
+            "fullname": data.get("fullname"),
+            "phone": data.get("phone"),
+            "email": data.get("email"),
+            "house": data.get("house"),
+            "trade": data.get("trade"),
+            "area": data.get("area"),
+            "city": data.get("city"),
+            "pin_code": data.get("pin_code"),
+            "delTime": data.get("delTime"),
+            "state": data.get("state"),
+            # "uplod": data.get("uplod"),
+            "uplod": usr,
+        }
+
+        # print(new_addres)
+        serializer = AddressSer(data=new_addres)
+
+        # print(serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user = serializer.save()
+            return Response(
+                {
+                    "stateCode": 200,
+                    "msg": "enter data",
+                }
+            )
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)

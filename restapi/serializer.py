@@ -23,10 +23,35 @@ class AccountsSeri(serializers.ModelSerializer):
             return user
 
 
+# ---------------------------------------------------------------------------- #
+#                    orc ProfilePage GET AND POST SERILIZER                    #
+# ---------------------------------------------------------------------------- #
+
 # PROFILE ACCOTUNS
-class ProfileSeri(serializers.ModelSerializer):
+class ProfileSer(serializers.ModelSerializer):
     class Meta:
         model = Profile
+        fields = "__all__"
+
+
+# ! PROFILE POST METHOD
+class PostProfileSer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "fullname",
+            # "email",
+            "pic",
+            "gender",
+        ]
+
+
+# ---------------------------------------------------------------------------- #
+#                       ! ADDRESS METHOD POST AND GET SERILIZER                                         #
+# ---------------------------------------------------------------------------- #
+class AddressSer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
         fields = "__all__"
 
 
@@ -46,7 +71,9 @@ class CartSer(serializers.ModelSerializer):
         depth = 2
 
 
-# !CART ADDED SERILIZER
+# ---------------------------------------------------------------------------- #
+#                           orc CART ADDED SERILIZER                           #
+# ---------------------------------------------------------------------------- #
 class AddCartSer(serializers.ModelSerializer):
     class Meta:
         model = ProductInCart
