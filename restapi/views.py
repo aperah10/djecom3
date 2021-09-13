@@ -471,8 +471,8 @@ class ProfilePage(APIView):
 
     def post(self, request, pk=None):
         data = request.data
-        idt=request.user.id
-        # idt = request.data.get("id") 
+        idt = request.user.id
+        # idt = request.data.get("id")
 
         cus = Profile.objects.get(pk=idt)
         # print("this is profile id ,:- ", idt)
