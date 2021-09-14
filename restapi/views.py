@@ -265,6 +265,7 @@ class Srh(ListAPIView):
 #  =======================GET DATA  SECTION =================================
 # SHOW ALL PRODUCT
 class AllProduct(ListAPIView):
+
     queryset = Product.objects.all()
     serializer_class = AllProductSer
 

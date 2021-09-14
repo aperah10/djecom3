@@ -1,0 +1,66 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Home Page  </title>
+    <!-- Bootstrap CSS Local -->
+    <link rel="stylesheet" href="{% static 'restapi/css/bootstrap.css' %}">  
+  <link rel="stylesheet" href="{% static 'restapi/css/table.css' %}"> 
+</head>
+<body>
+  
+
+{% for p in product %}
+
+
+
+
+<div class="container my-5">  
+  <div class="row">   
+   <div class="col-sm-6 text-center align-self-center">
+    <img src="{{p.pic.url}}" alt="" class="img-fluid img-thumbnail">
+     <h2>Product Title:  {{p.title}} </h2>
+    <hr>
+    <p>Product Description:  {{p.description}} </p> <br>
+   </div>
+   <div class="col-sm-5 offset-sm-1">
+   
+    <h4>Rs. {{p.discount_price}} <small class="fw-light text-decoration-line-through"> {{product.sales_price}} </small></h4> <br>
+     <!--FORM FOR ADD TO CART   -->
+     <form action="{% url 'pnc' %}" method="get" class="d-inline">
+         <input type="hidden" name="product_id" value="{{p.id}}">
+          <button type="submit" class="btn btn-primary shadow px-5 py-2 ms-4">  Add to Cart </button> 
+     </form>
+           <!-- END FORM TO ADD CART  -->
+    
+    
+    <a href="" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+    
+    
+   </div>
+  </div>  
+ </div>
+<!-- END DETALIS  -->
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+

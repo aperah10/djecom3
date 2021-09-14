@@ -11,8 +11,8 @@ with open(os.path.join(BASE_DIR, "secret.txt")) as f:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["djecoms.herokuapp.com", "127.0.0.1"]
 
