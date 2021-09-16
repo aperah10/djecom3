@@ -119,6 +119,38 @@ dtime = (
     ("Office (10 am - 6 pm delivery)", "Office (10 am - 6 pm delivery)"),
     ("AnyTime", "AnyTime"),
 )
+# STAT LIST
+STATE = [
+    "Andhra Pradesh ",
+    "Arunachal Pradesh",
+    "Assam ",
+    "Bihar ",
+    "Chhattisgarh ",
+    "Goa",
+    "Gujarat",
+    "Haryana ",
+    "Himachal Pradesh ",
+    "Jammu & Kashmir ",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala ",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram ",
+    "Nagaland",
+    "Odisha ",
+    "Punjab ",
+    "Rajasthan",
+    "Sikkim ",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+]
 
 
 class Address(models.Model):
@@ -136,11 +168,11 @@ class Address(models.Model):
     trade = models.CharField(max_length=200)
     area = models.CharField(max_length=200, default="Jaipur")
     city = models.CharField(max_length=100)
-    pin_code = models.IntegerField(
+    pinCode = models.IntegerField(
         validators=[RegexValidator("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")]
     )
     delTime = models.CharField(max_length=100, choices=dtime, default="AnyTime")
     state = models.CharField(choices=STATE_CHOICES, max_length=200, default="Rajasthan")
-
+    # newState=models.CharField(choices=)
     def __str__(self):
         return self.city

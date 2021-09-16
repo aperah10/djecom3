@@ -546,7 +546,7 @@ class AddressV(APIView):
             "trade": data.get("trade"),
             "area": data.get("area"),
             "city": data.get("city"),
-            "pin_code": data.get("pin_code"),
+            "pinCode": data.get("pinCode"),
             "delTime": data.get("delTime"),
             "state": data.get("state"),
             # "uplod": data.get("uplod"),
