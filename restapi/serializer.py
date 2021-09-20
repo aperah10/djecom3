@@ -40,7 +40,7 @@ class PostProfileSer(serializers.ModelSerializer):
         model = Profile
         fields = [
             "fullname",
-            # "email",
+            "email",
             "pic",
             "gender",
         ]
@@ -53,6 +53,24 @@ class AddressSer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = "__all__"
+
+
+class PostAddressSer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = [
+            "fullname",
+            "phone",
+            "email",
+            "house",
+            "trade",
+            "area",
+            "city",
+            "pinCode",
+            "delTime",
+            "state",
+            "uplod"
+        ]
 
 
 # ALL PRODUCT SHOW DATA

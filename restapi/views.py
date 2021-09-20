@@ -508,17 +508,17 @@ class ProfilePage(APIView):
 # ---------------------------------------------------------------------------- #
 class AddressV(APIView):
 
-    permission_classes = [
-        IsAuthenticated,
-    ]
-    authentication_classes = [
-        TokenAuthentication,
-    ]
+    # permission_classes = [
+    #     IsAuthenticated,
+    # ]
+    # authentication_classes = [
+    #     TokenAuthentication,
+    # ]
 
     # todo  GET METHOD
     def get(self, request):
         usr = request.user
-        addres = Profile.objects.filter(uplod=usr)
+        addres = Address.objects.filter(uplod=usr)
         # addres = Address.objects.filter(uplod="e1ff4d87-d9a6-4533-836a-0c640034b8eb")
 
         try:
@@ -554,7 +554,48 @@ class AddressV(APIView):
         }
 
         # print(new_addres)
-        serializer = AddressSer(data=new_addres)
+        serializer = PostAddressSer(data=new_addres)
+
+        # print(serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user = serializer.save()
+            return Response(
+                {
+                    "stateCode": 200,
+                    "msg": "enter data",
+                }
+            )
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+    # orc Update Adress
+    def put(self, request, pk=None):
+        data = request.data
+        idt = request.user.id
+        # idt = request.data.get("id")
+
+        cus = Address.objects.get(pk=idt)
+        # print("this is profile id ,:- ", idt)
+
+        # print(cus)
+        # product_obj = Product.objects.get(id=product_id)
+        new_address = {
+            "fullname": data.get("fullname"),
+            "phone": data.get("phone"),
+            "email": data.get("email"),
+            "house": data.get("house"),
+            "trade": data.get("trade"),
+            "area": data.get("area"),
+            "city": data.get("city"),
+            "pinCode": data.get("pinCode"),
+            "delTime": data.get("delTime"),
+            "state": data.get("state"),
+            # "uplod": data.get("uplod"),
+            # "uplod": usr,
+        }
+
+        # print(new_profile)
+        serializer = PostProfileSer(cus, data=new_address)
 
         # print(serializer)
         if serializer.is_valid(raise_exception=True):

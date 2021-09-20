@@ -9,6 +9,9 @@ from django.urls import reverse
 from django.core.validators import RegexValidator
 from django.contrib.auth.hashers import make_password
 
+#   ! LISTCHARFIELD
+# from django_mysql.models import ListCharField
+
 # hashed_password = make_password(raw_password)
 
 # Create your models here.
@@ -83,29 +86,29 @@ class Profile(models.Model):
 
 # ADDRESS
 STATE_CHOICES = (
-    ("Andhra Pradesh ", "Andhra Pradesh "),
+    ("Andhra Pradesh", "Andhra Pradesh"),
     ("Arunachal Pradesh", "Arunachal Pradesh"),
-    ("Assam ", "Assam "),
-    ("Bihar ", "Bihar "),
-    ("Chhattisgarh ", "Chhattisgarh "),
-    ("Goa ", "Goa "),
+    ("Assam", "Assam"),
+    ("Bihar", "Bihar"),
+    ("Chhattisgarh", "Chhattisgarh"),
+    ("Goa", "Goa"),
     ("Gujarat", "Gujarat"),
-    ("Haryana ", "Haryana "),
-    ("Himachal Pradesh ", "Himachal Pradesh "),
-    ("Jammu & Kashmir ", "Jammu & Kashmir "),
-    ("Jharkhand", " Jharkhand"),
+    ("Haryana", "Haryana"),
+    ("Himachal Pradesh", "Himachal Pradesh"),
+    ("Jammu & Kashmir", "Jammu & Kashmir"),
+    ("Jharkhand", "Jharkhand"),
     ("Karnataka", "Karnataka"),
-    ("Kerala ", "Kerala "),
+    ("Kerala", "Kerala"),
     ("Madhya Pradesh", "Madhya Pradesh"),
     ("Maharashtra", "Maharashtra"),
     ("Manipur", "Manipur"),
     ("Meghalaya", "Meghalaya"),
     ("Mizoram ", "Mizoram "),
     ("Nagaland", "Nagaland"),
-    ("Odisha ", "Odisha "),
-    ("Punjab ", "Punjab "),
+    ("Odisha", "Odisha"),
+    ("Punjab", "Punjab"),
     ("Rajasthan", "Rajasthan"),
-    ("Sikkim ", "Sikkim "),
+    ("Sikkim", "Sikkim"),
     ("Tamil Nadu", "Tamil Nadu"),
     ("Telangana", "Telangana"),
     ("Tripura", "Tripura"),
@@ -120,7 +123,7 @@ dtime = (
     ("AnyTime", "AnyTime"),
 )
 # STAT LIST
-STATE = [
+STATEC = [
     "Andhra Pradesh ",
     "Arunachal Pradesh",
     "Assam ",
@@ -164,15 +167,16 @@ class Address(models.Model):
     )
     phone = models.CharField(max_length=15, validators=[RegexValidator("^[789]\d{9}$")])
     email = models.EmailField(_("emailaddress"), null=True, blank=True)
-    house = models.CharField(max_length=300)
-    trade = models.CharField(max_length=200)
-    area = models.CharField(max_length=200, default="Jaipur")
-    city = models.CharField(max_length=100)
-    pinCode = models.IntegerField(
+    house = models.CharField(max_length=300, null=True, blank=True)
+    trade = models.CharField(max_length=200, null=True, blank=True)
+    area = models.CharField(max_length=200, default="Jaipur", null=True, blank=True)
+    city = models.CharField(max_length=100, null=True, blank=True)
+    pinCode = models.CharField(max_length=100,
         validators=[RegexValidator("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")]
     )
     delTime = models.CharField(max_length=100, choices=dtime, default="AnyTime")
     state = models.CharField(choices=STATE_CHOICES, max_length=200, default="Rajasthan")
-    # newState=models.CharField(choices=)
+    # newState = models.CharField(choices=STATEC, max_length=200, default="Rajasthan")
+
     def __str__(self):
         return self.city
