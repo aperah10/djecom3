@@ -24,9 +24,18 @@ class BaseOrder(models.Model):
         on_delete=models.CASCADE,
     )
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
-    amount = models.PositiveIntegerField(default=100)
     quantity = models.PositiveIntegerField(default=1)
     date = models.DateTimeField(auto_now_add=True)
+    amount = models.PositiveIntegerField(default=100)
+
+    # ! this method add ammount value is
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Check for create
+            self.amount = self.product.discount_price * self.quantity
+        else:
+
+            self.amount = self.product.discount_price * self.quantity
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
