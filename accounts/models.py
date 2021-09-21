@@ -103,7 +103,7 @@ STATE_CHOICES = (
     ("Maharashtra", "Maharashtra"),
     ("Manipur", "Manipur"),
     ("Meghalaya", "Meghalaya"),
-    ("Mizoram ", "Mizoram "),
+    ("Mizoram ", "Mizoram"),
     ("Nagaland", "Nagaland"),
     ("Odisha", "Odisha"),
     ("Punjab", "Punjab"),
@@ -117,7 +117,7 @@ STATE_CHOICES = (
     ("West Bengal", "West Bengal"),
 )
 
-dtime = (
+Dtime = (
     ("Home (7 am - 9 pm delivery)", "Home (7 am - 9 pm delivery)"),
     ("Office (10 am - 6 pm delivery)", "Office (10 am - 6 pm delivery)"),
     ("AnyTime", "AnyTime"),
@@ -175,7 +175,7 @@ class Address(models.Model):
         max_length=100,
         validators=[RegexValidator("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")],
     )
-    delTime = models.CharField(max_length=100, choices=dtime, default="AnyTime")
+    delTime = models.CharField(max_length=100, choices=Dtime, default="AnyTime")
     state = models.CharField(choices=STATE_CHOICES, max_length=200, default="Rajasthan")
     # newState = models.CharField(choices=STATEC, max_length=200, default="Rajasthan")
 

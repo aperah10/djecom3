@@ -15,6 +15,7 @@ Cat = (
 
 
 class Product(models.Model):
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
@@ -29,8 +30,23 @@ class Product(models.Model):
     uplod = models.ForeignKey(
         to=CustomUser, on_delete=models.CASCADE, null=True, blank=True
     )
-    quantity=models.PositiveIntegerField(default=1)
-    ammount= models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=1)
+
+    # def totalP(discount_price, quantity):
+
+    #     amm = discount_price * quantity
+    #     return amm
+
+    ammount = models.PositiveIntegerField(default=0)
+
+    # ! this method add ammount value is
+    def save(self, *args, **kwargs):
+        if not self.pk:  # Check for create
+            self.ammount = self.discount_price * self.quantity
+        else:
+
+            self.ammount = self.discount_price * self.quantity
+        return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("product", kwargs={"pk": self.pk})
