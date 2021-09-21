@@ -37,6 +37,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 # MY IMPORTS FOR ALL FILES
 from accounts.models import *
 from product.models import *
+from customer.models import *
 from .serializer import *
 
 
@@ -53,8 +54,8 @@ class HomeSec(TemplateView):
 # GET DATA API
 class DataGet(ListAPIView):
     # permission_classes=[IsAuthenticated,]
-    queryset = ProductInCart.objects.all()
-    serializer_class = CartSer
+    queryset = AllOrder.objects.all()
+    serializer_class = AllOrderSer
 
 
 # # UPDATE AND DESTROY AND GET  USER DATA
@@ -508,12 +509,12 @@ class ProfilePage(APIView):
 # ---------------------------------------------------------------------------- #
 class AddressV(APIView):
 
-    # permission_classes = [
-    #     IsAuthenticated,
-    # ]
-    # authentication_classes = [
-    #     TokenAuthentication,
-    # ]
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
 
     # todo  GET METHOD
     def get(self, request):
@@ -608,3 +609,77 @@ class AddressV(APIView):
                 }
             )
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+    # ! DELETE ADDRESS
+    def delete(self, request, pk=None):
+        idt = request.data.get("id")
+
+        try:
+            if Address.objects.filter(pk=idt).exists():
+                adr = Address.objects.filter(pk=idt)
+                # print(pod)
+                adr.delete()
+                res = {"error": False, "msg": "data delete"}
+            else:
+                res = {"error": True, "msg": " not have any data"}
+
+        except:
+            res = {"error": True}
+        return Response(res)
+
+
+# ---------------------------------------------------------------------------- #
+#                                 ! ORDER PAGE                                 #
+# ---------------------------------------------------------------------------- #
+class OrderPage(APIView):
+    # permission_classes = [
+    #     IsAuthenticated,
+    # ]
+    # authentication_classes = [
+    #     TokenAuthentication,
+    # ]
+
+    # !  ORDER REQUEST DATA
+    def post(self, request):
+        data = request.data
+        # usr = str(request.user.id)
+        usr = str("928397fa-126e-404a-8e64-2157e8b66a30")
+
+        new_addres = {
+            "product": data.get("product"),
+            "address": data.get("address"),
+            "amount": data.get("amount"),
+            "quantity": data.get("quantity"),
+            "status": data.get("status"),
+            "user": usr,
+        }
+
+        # print(new_addres)
+        serializer = AllOrderSer(data=new_addres)
+
+        # print(serializer)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user = serializer.save()
+            return Response(
+                {
+                    "stateCode": 200,
+                    "msg": "enter data",
+                }
+            )
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+    # ! CURRENT ORDER data
+    def get(self, request):
+        # usr = request.user
+        # order = CurrentOrder.objects.filter(user=usr)
+        order = CurrentOrder.objects.filter(user="928397fa-126e-404a-8e64-2157e8b66a30")
+
+        try:
+            ser = CurrentOrderSer(order, many=True)
+            alldata = ser.data
+
+        except:
+            alldata = ser.errors
+
+        return Response(alldata)

@@ -124,29 +124,29 @@ dtime = (
 )
 # STAT LIST
 STATEC = [
-    "Andhra Pradesh ",
+    "Andhra Pradesh",
     "Arunachal Pradesh",
-    "Assam ",
-    "Bihar ",
-    "Chhattisgarh ",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
     "Goa",
     "Gujarat",
-    "Haryana ",
-    "Himachal Pradesh ",
-    "Jammu & Kashmir ",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu & Kashmir",
     "Jharkhand",
     "Karnataka",
-    "Kerala ",
+    "Kerala",
     "Madhya Pradesh",
     "Maharashtra",
     "Manipur",
     "Meghalaya",
-    "Mizoram ",
+    "Mizoram",
     "Nagaland",
-    "Odisha ",
-    "Punjab ",
+    "Odisha",
+    "Punjab",
     "Rajasthan",
-    "Sikkim ",
+    "Sikkim",
     "Tamil Nadu",
     "Telangana",
     "Tripura",
@@ -171,12 +171,13 @@ class Address(models.Model):
     trade = models.CharField(max_length=200, null=True, blank=True)
     area = models.CharField(max_length=200, default="Jaipur", null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
-    pinCode = models.CharField(max_length=100,
-        validators=[RegexValidator("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")]
+    pinCode = models.CharField(
+        max_length=100,
+        validators=[RegexValidator("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$")],
     )
     delTime = models.CharField(max_length=100, choices=dtime, default="AnyTime")
     state = models.CharField(choices=STATE_CHOICES, max_length=200, default="Rajasthan")
     # newState = models.CharField(choices=STATEC, max_length=200, default="Rajasthan")
 
     def __str__(self):
-        return self.city
+        return str(self.uplod)

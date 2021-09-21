@@ -1,25 +1,54 @@
 from django.contrib import admin
-from .models import * 
+from .models import *
 
 # Myorder
-@admin.register(AllOrder)
-class OrderAdmin(admin.ModelAdmin):
-  list_display=('id','status', 'product','quantity','user')
- 
 
-   
+
+@admin.register(AllOrder)
+class AllOrderAdmin(admin.ModelAdmin):
+    list_display = ("id", "status", "product", "address", "amount", "quantity", "user")
+
+
+# !CURRENT ORDER
+@admin.register(CurrentOrder)
+class CurrentOrderAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "orderStatus",
+        "product",
+        "address",
+        "amount",
+        "quantity",
+        "user",
+    )
+
+
+# ! SUCCESS ORDERKEY
+@admin.register(SuccessOrder)
+class SuccessOrderAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "orderSeller",
+        "product",
+        "address",
+        "quantity",
+        "user",
+    )
+
+
 # PRDOCUT IN CART
 @admin.register(CancelOrder)
-class CancelAdmin(admin.ModelAdmin):
-  list_display=('id','status', 'product','quantity','user')
-
-# LIKE
-@admin.register(AllDataNotification)
-class AllDataNotiAdmin(admin.ModelAdmin):
-  list_display=('id','orderkey','user','addresskey') 
+class CancelOrderAdmin(admin.ModelAdmin):
+    list_display = ("id", "orderUser", "orderSeller", "amount")
 
 
-# NOTIFICATIONS
-@admin.register(NotificationOrder)
-class OrderNotificationAdmin(admin.ModelAdmin):
-  list_display=('id','product','sender','status','date','is_seen','txt')
+# # LIKE
+# @admin.register(AllDataNotification)
+# class AllDataNotiAdmin(admin.ModelAdmin):
+#     list_display = ("id", "orderkey", "user", "addresskey")
+
+
+# # NOTIFICATIONS
+# @admin.register(NotificationOrder)
+# class OrderNotificationAdmin(admin.ModelAdmin):
+#     list_display = ("id", "product", "sender", "status", "date", "is_seen", "txt")

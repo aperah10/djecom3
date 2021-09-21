@@ -7,6 +7,7 @@ from django.conf.urls import url
 # app_name ='restapi'
 
 urlpatterns = [
+    path("order/", views.OrderPage.as_view(), name="order"),
     path("profile/", views.ProfilePage.as_view(), name="profile"),
     path("address/", views.AddressV.as_view(), name="address"),
     # path("profilep/", views.ProfilePostV.as_view(), name="profilef"),
@@ -14,7 +15,7 @@ urlpatterns = [
     url(r"^hm/", views.HomePage.as_view()),
     path("", views.HomePage.as_view(), name="home"),
     path("h/", views.HomeSec.as_view(), name="hsec"),
-    path("reg/", views.DataGet.as_view(), name="getdata"),
+    path("reg/", views.DataGet.as_view(), name="getData"),
     # ==========POST REQUEST FOR ==================
     # path('login/', obtain_auth_token),
     path("login/", views.login, name="Login"),

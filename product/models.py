@@ -29,6 +29,8 @@ class Product(models.Model):
     uplod = models.ForeignKey(
         to=CustomUser, on_delete=models.CASCADE, null=True, blank=True
     )
+    quantity=models.PositiveIntegerField(default=1)
+    ammount= models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse("product", kwargs={"pk": self.pk})

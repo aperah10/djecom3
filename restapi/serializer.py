@@ -3,6 +3,7 @@ from rest_framework import serializers
 # MY IMPORT FOR ALL FIELS
 from accounts.models import *
 from product.models import *
+from customer.models import *
 
 # ================
 
@@ -69,7 +70,7 @@ class PostAddressSer(serializers.ModelSerializer):
             "pinCode",
             "delTime",
             "state",
-            "uplod"
+            "uplod",
         ]
 
 
@@ -111,3 +112,18 @@ class NotificationSer(serializers.ModelSerializer):
         model = Notification
         fields = "__all__"
         # depth = 1
+
+
+# ! ORDER PAGE METHOD
+class AllOrderSer(serializers.ModelSerializer):
+    class Meta:
+        model = AllOrder
+        fields = "__all__"
+        # depth = 2
+
+
+class CurrentOrderSer(serializers.ModelSerializer):
+    class Meta:
+        model = CurrentOrder
+        fields = "__all__"
+        # depth = 2
